@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { AddToCart } from "@/actions/addToCart.action";
@@ -5,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import { featuredProducts } from "@/constants";
 import { IndianRupee, ShoppingCart } from "lucide-react";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import { toast } from "sonner";
 
 const FeaturedProducts = () => {

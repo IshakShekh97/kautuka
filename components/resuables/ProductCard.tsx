@@ -11,7 +11,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, ShoppingCart, ShoppingCartIcon } from "lucide-react";
 import Link from "next/link";
-import { AddToCart } from "@/actions/addToCart.action";
+// import { AddToCart } from "@/actions/addToCart.action";
 
 interface ProductCardProps {
   title?: string;
