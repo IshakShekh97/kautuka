@@ -19,13 +19,17 @@ export const CreateNewProduct = async (
     return submission.reply();
   }
 
+  const flattenUrls = submission.value.images.flatMap((urlStr) =>
+    urlStr.split(",").map((url) => url.trim())
+  );
+
   await prisma.product.create({
     data: {
       name: submission.value.name,
       description: submission.value.description,
       status: submission.value.status,
       price: submission.value.price,
-      images: submission.value.images,
+      images: flattenUrls,
       category: submission.value.categories,
     },
   });
