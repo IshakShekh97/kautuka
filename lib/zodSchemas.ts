@@ -70,3 +70,27 @@ export const productSchema = z.object({
     })
   ),
 });
+
+export const newProductSchema = z.object({
+  name: z.string({
+    message: "Name must be a string",
+    required_error: "Name is required",
+    invalid_type_error: "Name must be a string",
+  }),
+  price: z.number({
+    message: "Price must be a number",
+    required_error: "Price is required",
+    invalid_type_error: "Price must be a number",
+  }),
+  description: z.string({
+    message: "Description must be a string",
+    required_error: "Description is required",
+    invalid_type_error: "Description must be a string",
+  }),
+  tags: z.array(z.string()).nonempty("Please at least one item"),
+  stock: z.boolean({
+    message: "Stock must be a boolean",
+    required_error: "Stock is required",
+    invalid_type_error: "Stock must be a boolean",
+  }),
+});

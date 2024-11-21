@@ -14,36 +14,46 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model Tags {
-  id   String @id @default(uuid())
-  name String
+// model Tags {
+//   id   String @id @default(uuid())
+//   name String
 
-  Products   Products? @relation(fields: [productsId], references: [id])
-  productsId String?
-}
+//   Products   Products? @relation(fields: [productsId], references: [id])
+//   productsId String?
+// }
 
-model Categories {
-  id   String @id @default(cuid())
-  name String
+// model Categories {
+//   id   String @id @default(cuid())
+//   name String
 
-  Products   Products? @relation(fields: [productsId], references: [id])
-  productsId String?
-}
+//   Products   Products? @relation(fields: [productsId], references: [id])
+//   productsId String?
+// }
 
-model Products {
-  id          String   @id @default(uuid())
-  images      String[]
-  name        String
-  description String
-  price       Float
-  stock       Boolean
+// model Products {
+//   id          String   @id @default(uuid())
+//   images      String[]
+//   name        String
+//   description String
+//   price       Float
+//   stock       Boolean
 
-  tags       Tags[]
-  categories Categories[]
-}
+//   tags       Tags[]
+//   categories Categories[]
+// }
 
-model Cart {
-  id        String @id @default(uuid())
-  userId    String
-  productId String
+// model Cart {
+//   id        String @id @default(uuid())
+//   userId    String
+//   productId String
+// }
+
+model User {
+  id              String @id
+  email           String
+  firstName       String
+  lastName        String
+  profileImageUrl String
+
+  createdAt DateTime @default(now())
 }

@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import { AddToCart } from "@/actions/addToCart.action";
 import { Button } from "@/components/ui/button";
 import { featuredProducts } from "@/constants";
 import { IndianRupee, ShoppingCart } from "lucide-react";
@@ -35,7 +34,7 @@ const FeaturedProducts = () => {
                       </span>
                     </div>
 
-                    <form action={AddToCart}>
+                    <form action={""}>
                       <Button
                         variant={"outline"}
                         size={"icon"}

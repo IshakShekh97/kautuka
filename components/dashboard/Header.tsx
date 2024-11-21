@@ -31,7 +31,8 @@ const Header = () => {
             <Button
               variant={"outline"}
               className={cn(
-                item.href === pathname && "bg-foreground text-background"
+                "border border-r-[6px] border-b-4 border-foreground",
+                item.href === pathname && "bg-foreground text-background "
               )}
             >
               {item.name}
@@ -68,7 +69,7 @@ const Header = () => {
                   <Button
                     variant={"outline"}
                     className={cn(
-                      "w-full",
+                      "w-full border border-r-[6px] border-b-4 border-gray-600 ",
                       item.href === pathname && "bg-foreground text-background"
                     )}
                   >
