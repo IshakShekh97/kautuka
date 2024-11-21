@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { Button } from "../ui/button";
 
-const Footer = ({ className }: { className?: string }) => {
+const HomePageFooter = ({ className }: { className?: string }) => {
   return (
     <div className="pt-5 bg-muted">
       <div className={cn(" w-full pb-10", className)}>
@@ -194,4 +194,4 @@ const Footer = ({ className }: { className?: string }) => {
   );
 };
 
-export default Footer;
+export default HomePageFooter;
