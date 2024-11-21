@@ -11,18 +11,16 @@ const DashBoardLayout = async ({ children }: { children: React.ReactNode }) => {
     (email) => email.emailAddress
   );
   if (
-    !emailAddress.includes(
-      (process.env.SECRET_EMAIL_1 as string) ||
-        (process.env.SECRET_EMAIL_2 as string)
-    )
+    !emailAddress.includes(process.env.SECRET_EMAIL_1 as string) &&
+    !emailAddress.includes(process.env.SECRET_EMAIL_2 as string)
   ) {
     return redirect("/");
   }
 
   return (
     <div className="">
-      <div className="flex w-full flex-col max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 ">
-        <Header />
+      <Header />
+      <div className="flex w-full flex-col max-w-screen-[1600px] mx-auto px-3 pt-5  sm:px-10 md:px-14 lg:px-20 ">
         <section className="my-10">{children}</section>
       </div>
     </div>

@@ -93,7 +93,7 @@ const Navbar = () => {
       {/* Mobile Nav */}
       <div className="flex items-center justify-center gap-2 lg:hidden">
         <SignedIn>
-          <Button variant={"ghost"} className="" size={"icon"}>
+          <Button variant={"ghost"} size={"icon"}>
             <UserButton />
           </Button>
           <Button variant={"outline"} size={"icon"} asChild className="">

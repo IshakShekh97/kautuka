@@ -1,3 +1,5 @@
+import { GetAllProducts } from "@/actions/product.action";
+import { GetAllUsers } from "@/actions/user.actions";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
   Card,
@@ -9,7 +11,10 @@ import {
 import { IndianRupee, PartyPopper, ShoppingBag } from "lucide-react";
 import React from "react";
 
-const DashBoardPage = () => {
+const DashBoardPage = async () => {
+  const totalProducts = (await GetAllProducts()).length;
+  const totalUsers = (await GetAllUsers()).length;
+
   return (
     <>
       <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
@@ -42,12 +47,12 @@ const DashBoardPage = () => {
         <Card className="border-r-8 border-b-8 border-amber-500">
           <CardHeader className="flex items-center justify-between flex-row pb-2 px-5">
             <CardTitle className="text-3xl font-extrabold">
-              Totat Products
+              Total Products
             </CardTitle>
             <PartyPopper className="h-4 w—4 text-amber-500" />
           </CardHeader>
           <CardContent className="text—xs text—muted-foreground">
-            <p className="text-2xl font-bold">37</p>
+            <p className="text-2xl font-bold">{totalProducts}</p>
             <p className="text-xs text-muted-foreground">products created</p>
           </CardContent>
         </Card>
@@ -59,7 +64,7 @@ const DashBoardPage = () => {
             <PartyPopper className="h-4 w—4 text-muted-foreground border-indigo-500" />
           </CardHeader>
           <CardContent className="text—xs text—muted-foreground">
-            <p className="text-2xl font-bold">95</p>
+            <p className="text-2xl font-bold">{totalUsers}</p>
             <p className="text-xs text-muted-foreground">
               Total Users signed up{" "}
             </p>

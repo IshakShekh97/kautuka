@@ -57,3 +57,31 @@ model User {
 
   createdAt DateTime @default(now())
 }
+
+model Product {
+  id          String        @id @default(uuid())
+  name        String
+  description String
+  status      ProductStatus
+  price       Int
+  images      String[]
+  category    Category
+  isFeatured  Boolean       @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum ProductStatus {
+  draft
+  published
+  archived
+  inStock
+  outOfStock
+}
+
+enum Category {
+  oversize
+  regularFit
+  polo
+}

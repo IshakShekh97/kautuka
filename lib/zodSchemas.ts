@@ -1,18 +1,5 @@
 import { z } from "zod";
 
-export const cartSchema = z.object({
-  productId: z.string({
-    message: "Product ID must be a string",
-    required_error: "Product ID is required",
-    invalid_type_error: "Product ID must be a string",
-  }),
-  userId: z.string({
-    message: "You must provide be Logged in to add to cart",
-    required_error: "You must provide be Logged in to add to cart",
-    invalid_type_error: "You must provide be Logged in to add to cart",
-  }),
-});
-
 export const productSchema = z.object({
   name: z
     .string({
@@ -36,61 +23,37 @@ export const productSchema = z.object({
       message: "Description must be at least 3 characters",
     })
     .max(700, {
-      message: "Description must be at most 255 characters",
+      message: "Description must be at most 700 characters",
     }),
-  price: z.number({
-    message: "Price must be a Number",
-    required_error: "Price is required",
-    invalid_type_error: "Price must be a string",
-  }),
-  stock: z.boolean({
-    message: "Stock must be a boolean",
-    required_error: "Stock is required",
-    invalid_type_error: "Stock must be a boolean",
-  }),
-  tags: z.array(
-    z.string({
-      message: "Tags must be a string",
-      required_error: "Tags is required",
-      invalid_type_error: "Tags must be a string",
-    })
-  ),
-  categories: z.array(
-    z.string({
-      message: "Categories must be a string",
-      required_error: "Categories is required",
-      invalid_type_error: "Categories must be a string",
-    })
-  ),
-  images: z.array(
-    z.string({
-      message: "Images must be a string",
-      required_error: "Images is required",
-      invalid_type_error: "Images must be a string",
-    })
-  ),
-});
 
-export const newProductSchema = z.object({
-  name: z.string({
-    message: "Name must be a string",
-    required_error: "Name is required",
-    invalid_type_error: "Name must be a string",
-  }),
-  price: z.number({
-    message: "Price must be a number",
-    required_error: "Price is required",
-    invalid_type_error: "Price must be a number",
-  }),
-  description: z.string({
-    message: "Description must be a string",
-    required_error: "Description is required",
-    invalid_type_error: "Description must be a string",
-  }),
-  tags: z.array(z.string()).nonempty("Please at least one item"),
-  stock: z.boolean({
-    message: "Stock must be a boolean",
-    required_error: "Stock is required",
-    invalid_type_error: "Stock must be a boolean",
-  }),
+  status: z.enum(["draft", "published", "archived", "inStock", "outOfStock"]),
+  price: z
+    .number({
+      message: "Price must be a Number",
+      required_error: "Price is required",
+      invalid_type_error: "Price must be a string",
+    })
+    .min(1),
+  images: z
+    .array(
+      z.string({
+        message: "Images must be a string",
+        required_error: "Images is required",
+        invalid_type_error: "Images must be a string",
+      })
+    )
+    .min(1, {
+      message: "At least one image is required",
+    })
+    .max(5, {
+      message: "At most 5 images are allowed",
+    }),
+  categories: z.enum(["oversize", "regularFit", "polo"]),
+  isFeatured: z
+    .boolean({
+      message: "Is Featured must be True or False",
+      required_error: "Is Featured is required",
+      invalid_type_error: "Is Featured must be True or False",
+    })
+    .optional(),
 });

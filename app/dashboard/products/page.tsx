@@ -1,3 +1,4 @@
+import { GetAllProducts } from "@/actions/product.action";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -28,7 +29,9 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const ProductsPage = () => {
+const ProductsPage = async () => {
+  const products = await GetAllProducts();
+
   return (
     <>
       <div className="flex items-center justify-end">
@@ -38,7 +41,6 @@ const ProductsPage = () => {
           </Link>
         </Button>
       </div>
-
       <Card className="mt-5">
         <CardHeader className="px-7">
           <CardTitle className="sm:text-4xl text-2xl font-extrabold">
@@ -52,48 +54,71 @@ const ProductsPage = () => {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="w-[100px]">Image</TableHead>
+                <TableHead className="w-[150px]">Image</TableHead>
                 <TableHead>Name</TableHead>
                 <TableHead className="w-[120px]">Price</TableHead>
                 <TableHead className="w-[120px]">Date Created</TableHead>
-                <TableHead className="w-[120px]">Stock</TableHead>
+                <TableHead className="w-[120px]">Status</TableHead>
                 <TableHead className="text-end w-[100px] ">Actions</TableHead>
               </TableRow>
             </TableHeader>
 
             <TableBody>
-              <TableRow>
-                <TableCell>
-                  <Image
-                    src="/images/shirt-1.webp"
-                    alt="product"
-                    width={100}
-                    height={100}
-                    className="size-16 aspect-square object-cover"
-                  />
-                </TableCell>
-                <TableCell>Oversized T-Shirt - Black</TableCell>
-                <TableCell>₹ 499</TableCell>
-                <TableCell>{new Date().toLocaleDateString()}</TableCell>
-                <TableCell>
-                  <Badge variant={"positive"}>in Stock</Badge>
-                </TableCell>
-                <TableCell className="text-end">
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button size={"icon"} variant={"outline"}>
-                        <MoreHorizontal />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                      <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem>Edit</DropdownMenuItem>
-                      <DropdownMenuItem>Delete</DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </TableCell>
-              </TableRow>
+              {products.length === 0 && (
+                <TableRow>
+                  <TableCell colSpan={6} className="text-center text-xl py-10">
+                    No products found , Create one Too see it here
+                  </TableCell>
+                </TableRow>
+              )}
+
+              {products
+                .slice()
+                .reverse()
+                .map((product) => (
+                  <TableRow key={product.id}>
+                    <TableCell>
+                      <div className="relative w-[90px] h-[90px] aspect-square">
+                        <Image
+                          src={product.images[0]}
+                          alt={`product image ${product.name}`}
+                          width={100}
+                          height={100}
+                          className="w-full h-full rounded-lg object-cover border"
+                        />
+                      </div>
+                    </TableCell>
+                    <TableCell>{product.name}</TableCell>
+                    <TableCell>₹ {product.price}</TableCell>
+                    <TableCell>
+                      {new Date(product.createdAt).toLocaleDateString()}
+                    </TableCell>
+                    <TableCell>
+                      <Badge variant={"positive"}>{product.status}</Badge>
+                    </TableCell>
+                    <TableCell className="text-end">
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button size={"icon"} variant={"outline"}>
+                            <MoreHorizontal />
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                          <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                          <DropdownMenuSeparator />
+                          <DropdownMenuItem>
+                            <Link
+                              href={`/dashboard/products/${product.id}/edit`}
+                            >
+                              Edit
+                            </Link>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem>Delete</DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </TableCell>
+                  </TableRow>
+                ))}
             </TableBody>
           </Table>
         </CardContent>

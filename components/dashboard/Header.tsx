@@ -22,7 +22,7 @@ const Header = () => {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 flex items-center justify-between h-16 gap-4 border-b bg-transparent backdrop-blur-md">
+    <header className="sticky top-0 flex items-center justify-between h-16 gap-4 border-b border-foreground bg-transparent backdrop-blur-md px-3 sm:px-10 md:px-14 lg:px-20">
       <Logo />
 
       <nav className="hidden font-medium md:flex flex-row items-center gap-5 text-sm lg:gap-6 ">
