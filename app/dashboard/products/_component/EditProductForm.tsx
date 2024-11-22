@@ -31,9 +31,6 @@ const EditProductForm = ({ productData }: EditProductFormProps) => {
   const [images, setImages] = useState<string[] | undefined>(
     productData.images
   );
-  const [checked, setChecked] = useState<boolean | undefined>(
-    productData.isFeatured
-  );
   const [lastResult, action] = useActionState(UpdateProduct, undefined);
   const [form, fields] = useForm({
     lastResult,
@@ -196,10 +193,7 @@ const EditProductForm = ({ productData }: EditProductFormProps) => {
               <div className="flex flex-row items-center sm:pt-5 gap-3  w-full">
                 <Switch
                   id="featured"
-                  checked={checked}
-                  onCheckedChange={() => {
-                    setChecked(!checked);
-                  }}
+                  checked={productData.isFeatured}
                   key={fields.isFeatured.key}
                   name={fields.isFeatured.name}
                   defaultValue={fields.isFeatured.initialValue}

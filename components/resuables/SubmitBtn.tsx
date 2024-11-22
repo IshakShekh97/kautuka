@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+
 import { Button, ButtonProps } from "../ui/button";
 import { useFormStatus } from "react-dom";
 import { cn } from "@/lib/utils";
@@ -8,7 +9,7 @@ interface SubmitBtnProps {
   text: string;
   loadingText: string;
   variant: ButtonProps["variant"];
-  className: string;
+  className?: string;
 }
 
 const SubmitBtn = ({
@@ -20,22 +21,22 @@ const SubmitBtn = ({
   const { pending } = useFormStatus();
 
   return (
-    <div>
-      <Button
-        variant={variant}
-        disabled={pending}
-        className={cn(className, "flex")}
-      >
-        {pending ? (
-          <p className="flex items-center gap-2">
-            <Loader2 className="animate-spin" />
-            <span className="animate-pulse ">{loadingText}</span>
-          </p>
-        ) : (
-          <p>{text}</p>
-        )}
-      </Button>
-    </div>
+    <>
+      {pending ? (
+        <Button variant={variant} disabled className={cn(className, "flex")}>
+          <Loader2 className="animate-spin" />
+          {loadingText}
+        </Button>
+      ) : (
+        <Button
+          variant={variant}
+          type="submit"
+          className={cn(className, "flex")}
+        >
+          {text}
+        </Button>
+      )}
+    </>
   );
 };
 

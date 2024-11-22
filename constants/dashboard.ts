@@ -14,9 +14,9 @@ export const dashboardNavItems = [
     href: "/dashboard/products",
     idx: 2,
   },
-  {
-    name: "Categories",
-    href: "/dashboard/categories",
-    idx: 3,
-  },
+  // {
+  //   name: "Categories",
+  //   href: "/dashboard/categories",
+  //   idx: 3,
+  // },
 ];
