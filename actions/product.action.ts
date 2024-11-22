@@ -38,6 +38,15 @@ export const CreateNewProduct = async (
 };
 
 export const GetAllProducts = async () => {
-  const products = await prisma.product.findMany();
+  const products = await prisma.product.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
   return products;
+};
+
+export const GetProductById = async (id: string) => {
+  const product = await prisma.product.findUnique({ where: { id } });
+  return product;
 };

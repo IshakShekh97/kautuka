@@ -3,18 +3,22 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { productfeatures, staticImages, tags } from "@/constants";
-import { cn } from "@/lib/utils";
+import { productfeatures, tags } from "@/constants";
+// import { cn } from "@/lib/utils";
+import { Product } from "@prisma/client";
 import { IndianRupee, ShoppingBag, ShoppingCart } from "lucide-react";
 
 import Image from "next/image";
 import React, { useState } from "react";
 
-const ProductContent = ({ id }: { id: string }) => {
-  const [image, setImage] = useState<string | undefined>(
-    `/images/shirt-${id}.webp`
-  );
-  const isInStock = true;
+interface ProductContentProps {
+  id: string;
+  product: Product;
+}
+
+const ProductContent = ({ id, product }: ProductContentProps) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [image, setImage] = useState<string[] | undefined>(product.images);
 
   return (
     <>
@@ -23,7 +27,7 @@ const ProductContent = ({ id }: { id: string }) => {
           <Card className="w-full bg-card p-2 rounded-md md:w-[40rem] ">
             <div className="rounded-md relative h-[26rem] sm:h-[32rem] md:h-[40rem] xl:h-full  overflow-hidden">
               <Image
-                src={image as string}
+                src={image?.[0] as string}
                 alt={id}
                 fill
                 className="object-cover w-full"
@@ -37,27 +41,12 @@ const ProductContent = ({ id }: { id: string }) => {
             {/* Prioduct Images */}
 
             <div className="flex flex-wrap gap-4 items-center justify-center xl:max-w-[75%] ">
-              {staticImages.map((img) => (
-                <Image
-                  onClick={() => setImage(img.imageUrl)}
-                  key={img.idx}
-                  src={img.imageUrl}
-                  alt={img.alt}
-                  height={100}
-                  width={100}
-                  className={cn(
-                    "w-20 h-20 object-cover rounded-md cursor-pointer",
-                    image === img.imageUrl
-                      ? "border-2 border-primary"
-                      : "opacity-60"
-                  )}
-                />
-              ))}
+              <></>
             </div>
 
             {/* Product Heading */}
             <h1 className="md:text-5xl pt-5 text-3xl font-bold text-pretty xl:max-w-[75%]">
-              Oversized Cotton T-Shirt
+              {product.name}
             </h1>
             {/* Product Description */}
             <div className="tags flex items-center pt-5 flex-wrap gap-x-1 gap-y-2 sm:gap-x-3 sm:gap-y-3 xl:max-w-[75%]">
@@ -67,11 +56,7 @@ const ProductContent = ({ id }: { id: string }) => {
             </div>
             {/* Product Tags */}
             <p className="pt-10 text-sm text-muted-foreground text-pretty xl:max-w-[75%]">
-              This oversized black t-shirt is crafted from 100% high-quality
-              cotton, ensuring maximum comfort and breathability. It features a
-              unique and funky doodle art print that adds a touch of creativity
-              and fun to your casual wardrobe. Ideal for those who appreciate
-              both comfort and artistic flair in their clothing.
+              {product.description}
             </p>
             {/* Product Price */}
             <div className="pt-6 flex items-center justify-between xl:max-w-[75%]">
@@ -79,37 +64,33 @@ const ProductContent = ({ id }: { id: string }) => {
                 <div className="flex items-center">
                   <IndianRupee className="size-7 font-bold" />
                   <span className="text-3xl font-semibold text-pretty">
-                    999
+                    {product.price}
                   </span>
                 </div>
                 <div className="text-xs flex items-center ml-2 pt-1">
                   M.R.P
                   <IndianRupee className="size-3 ml-3" />
                   <span className="line-through ml-2 text-muted-foreground">
-                    1,299
+                    {product.price + 390}
                   </span>
                 </div>
               </div>
 
               <div className="">
-                {isInStock ? (
-                  <Badge variant={"positive"}>In Stock</Badge>
-                ) : (
-                  <Badge variant={"destructive"}>Out of Stock</Badge>
-                )}
+                <Badge variant={"positive"}>{product.status}</Badge>
               </div>
             </div>
             {/* Product Buttons */}
             <div className="flex pt-5 gap-2 md:gap-3 flex-col *:w-full">
               <Button
-                disabled={!isInStock}
+                disabled={product.status === "outOfStock"}
                 className="items-center gap-2 xl:max-w-[75%] "
               >
                 <ShoppingCart className="size-5 pb-1" />
                 Add to Cart
               </Button>
               <Button
-                disabled={!isInStock}
+                disabled={product.status === "outOfStock"}
                 className="items-center gap-2 xl:max-w-[75%] "
               >
                 <ShoppingBag className="size-5 pb-1" />

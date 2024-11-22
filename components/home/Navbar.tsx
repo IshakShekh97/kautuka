@@ -20,7 +20,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "../ui/accordion";
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
+import { SignedIn, SignedOut, SignUpButton, UserButton } from "@clerk/nextjs";
 import Logo from "../resuables/Logo";
 
 const Navbar = () => {
@@ -75,7 +75,7 @@ const Navbar = () => {
         </Button>
         <SignedOut>
           <Button variant={"outline"} size={"lg"}>
-            <SignInButton />
+            <SignUpButton forceRedirectUrl={"/api/create-user"} />
           </Button>
         </SignedOut>
         <SignedIn>
@@ -104,7 +104,7 @@ const Navbar = () => {
         </SignedIn>
         <SignedOut>
           <Button asChild variant={"outline"}>
-            <SignInButton />
+            <SignUpButton forceRedirectUrl={"/api/create-user"} />
           </Button>
         </SignedOut>
 
@@ -157,7 +157,7 @@ const Navbar = () => {
                       size={"lg"}
                       className="flex-1 w-full"
                     >
-                      <SignInButton />
+                      <SignUpButton forceRedirectUrl={"/api/create-user"} />
                     </Button>
                   </SignedOut>
                   <SignedIn>

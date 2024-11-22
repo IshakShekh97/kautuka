@@ -1,17 +1,29 @@
+import { GetAllProducts } from "@/actions/product.action";
 import GoBackBtn from "@/components/resuables/GoBackBtn";
 import ProductCard from "@/components/resuables/ProductCard";
-import { staticImages } from "@/constants";
 import Link from "next/link";
 
-const AllProductsPage = () => {
-  return (
-    <div className="h-full w-full max-md:px-1 flex flex-col mb-10">
-      <GoBackBtn herf="/" btnText="Go Back To HomePage" className="pl-10" />
+const AllProductsPage = async () => {
+  const products = await GetAllProducts();
 
-      <div className="flex max-xl:items-center max-xl:justify-center flex-wrap gap-x-1 gap-y-2 sm:gap-5 md:pl-10 ">
-        {staticImages.map((image) => (
-          <Link key={image.idx} href={`/products/${image.idx + 1}`}>
-            <ProductCard imageAlt={image.alt} imageUrl={image.imageUrl} />
+  return (
+    <div className="h-full w-full flex flex-col min-h-screen">
+      <GoBackBtn herf="/" btnText="Go Back To HomePage" className="" />
+      <div className="flex w-full h-full flex-wrap gap-x-1 gap-y-2 sm:gap-5 items-center mb-5">
+        {products.length === 0 && (
+          <p className="text-center text-3xl font-black capitalize">
+            No products found !!
+          </p>
+        )}
+
+        {products.map((product) => (
+          <Link key={product.id} href={`/products/${product.id}`}>
+            <ProductCard
+              title={product.name}
+              description={product.description}
+              imageAlt={product.name}
+              imageUrl={product.images[0]}
+            />
           </Link>
         ))}
       </div>
