@@ -1,4 +1,5 @@
 import { GetAllProducts } from "@/actions/product.action";
+import GoBackBtn from "@/components/resuables/GoBackBtn";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -16,6 +17,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   Table,
   TableBody,
@@ -34,6 +36,8 @@ const ProductsPage = async () => {
 
   return (
     <>
+      <GoBackBtn btnText="Dashboard" herf="/dashboard" />
+
       <div className="flex items-center justify-end">
         <Button asChild>
           <Link href="/dashboard/products/new">
@@ -63,63 +67,91 @@ const ProductsPage = async () => {
               </TableRow>
             </TableHeader>
 
-            <TableBody>
-              {products.length === 0 && (
-                <TableRow>
-                  <TableCell colSpan={6} className="text-center text-xl py-10">
-                    No products found , Create one Too see it here
-                  </TableCell>
-                </TableRow>
-              )}
+            {products ? (
+              <>
+                <TableBody>
+                  {products.length === 0 && (
+                    <TableRow>
+                      <TableCell
+                        colSpan={6}
+                        className="text-center text-xl py-10"
+                      >
+                        No products found , Create one Too see it here
+                      </TableCell>
+                    </TableRow>
+                  )}
 
-              {products
-                .slice()
-                .reverse()
-                .map((product) => (
-                  <TableRow key={product.id}>
-                    <TableCell>
-                      <div className="relative w-[90px] h-[90px] aspect-square">
-                        <Image
-                          src={product.images[0]}
-                          alt={`product image ${product.name}`}
-                          width={100}
-                          height={100}
-                          className="w-full h-full rounded-lg object-cover border"
-                        />
-                      </div>
-                    </TableCell>
-                    <TableCell>{product.name}</TableCell>
-                    <TableCell>₹ {product.price}</TableCell>
-                    <TableCell>
-                      {new Date(product.createdAt).toLocaleDateString()}
-                    </TableCell>
-                    <TableCell>
-                      <Badge variant={"positive"}>{product.status}</Badge>
-                    </TableCell>
-                    <TableCell className="text-end">
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <Button size={"icon"} variant={"outline"}>
-                            <MoreHorizontal />
-                          </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                          <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                          <DropdownMenuSeparator />
-                          <DropdownMenuItem>
-                            <Link
-                              href={`/dashboard/products/${product.id}/edit`}
-                            >
-                              Edit
-                            </Link>
-                          </DropdownMenuItem>
-                          <DropdownMenuItem>Delete</DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
-                    </TableCell>
-                  </TableRow>
-                ))}
-            </TableBody>
+                  {products.map((product) => (
+                    <TableRow key={product.id}>
+                      <TableCell>
+                        <div className="relative w-[90px] h-[90px] aspect-square">
+                          {product.images ? (
+                            <>
+                              <Image
+                                src={product.images[0]}
+                                alt={`product image ${product.name}`}
+                                width={100}
+                                height={100}
+                                className="w-full h-full rounded-lg object-cover border"
+                              />
+                            </>
+                          ) : (
+                            <>
+                              <div className="size-[70px] items-center flex  justify-center">
+                                <Skeleton className="size-full" />
+                              </div>
+                            </>
+                          )}
+                        </div>
+                      </TableCell>
+                      <TableCell>{product.name}</TableCell>
+                      <TableCell>₹ {product.price}</TableCell>
+                      <TableCell>
+                        {new Date(product.createdAt).toLocaleDateString()}
+                      </TableCell>
+                      <TableCell>
+                        <Badge variant={"positive"}>{product.status}</Badge>
+                      </TableCell>
+                      <TableCell className="text-end">
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button size={"icon"} variant={"outline"}>
+                              <MoreHorizontal />
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent align="end">
+                            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem asChild>
+                              <Link
+                                href={`/dashboard/products/edit/${product.id}`}
+                              >
+                                Edit
+                              </Link>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem>Delete</DropdownMenuItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </>
+            ) : (
+              <>
+                <TableBody className="">
+                  {Array.from({ length: 4 }).map((_, index) => (
+                    <TableRow key={index}>
+                      <TableCell colSpan={6}>
+                        <Skeleton className="w-full h-full flex items-center justify-center">
+                          <p className="text-xl py-4">Loading Products ...</p>
+                        </Skeleton>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </>
+            )}
           </Table>
         </CardContent>
       </Card>

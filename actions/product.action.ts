@@ -37,6 +37,37 @@ export const CreateNewProduct = async (
   redirect("/dashboard/products");
 };
 
+export const UpdateProduct = async (prevState: unknown, formData: FormData) => {
+  await validateAdmin();
+
+  const submission = parseWithZod(formData, { schema: productSchema });
+  const id = formData.get("id") as string;
+
+  if (submission.status !== "success") {
+    return submission.reply();
+  }
+
+  const flattenUrls = submission.value.images.flatMap((urlStr) =>
+    urlStr.split(",").map((url) => url.trim())
+  );
+
+  await prisma.product.update({
+    where: { id },
+    data: {
+      name: submission.value.name,
+      description: submission.value.description,
+      category: submission.value.categories,
+      price: submission.value.price,
+      isFeatured: submission.value.isFeatured,
+      status: submission.value.status,
+
+      images: flattenUrls,
+    },
+  });
+
+  redirect("/dashboard/products");
+};
+
 export const GetAllProducts = async () => {
   const products = await prisma.product.findMany({
     orderBy: {
