@@ -9,7 +9,9 @@ import { Product } from "@prisma/client";
 import { IndianRupee, ShoppingBag, ShoppingCart } from "lucide-react";
 
 import Image from "next/image";
-import React, { useState } from "react";
+import { useState } from "react";
+// import { usePathname, useRouter, useSearchParams } from "next/navigation";
+// import React, { useEffect, useState } from "react";
 
 interface ProductContentProps {
   id: string;
@@ -19,6 +21,21 @@ interface ProductContentProps {
 const ProductContent = ({ id, product }: ProductContentProps) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [image, setImage] = useState<string[] | undefined>(product.images);
+
+  // const searchParams = useSearchParams();
+  // const pathname = usePathname();
+  // const router = useRouter();
+
+  // useEffect(() => {
+  //   router.replace(`${pathname}?image=${image?.[0]}`);
+  // }, [image]);
+
+  // useEffect(() => {
+  //   const image = searchParams.get("image");
+  //   if (image) {
+  //     setImage([image]);
+  //   }
+  // }, [searchParams]);
 
   return (
     <>
@@ -40,8 +57,32 @@ const ProductContent = ({ id, product }: ProductContentProps) => {
           <div className="flex flex-col md:px-10  max-md:w-full">
             {/* Prioduct Images */}
 
-            <div className="flex flex-wrap gap-4 items-center justify-center xl:max-w-[75%] ">
-              <></>
+            {/* <div className="flex flex-wrap gap-4 items-center justify-center xl:max-w-[75%] ">
+              <>
+                {product.images?.map((image) => (
+                  <Image
+                    src={image}
+                    alt={id}
+                    width={100}
+                    height={100}
+                    className="object-cover w-full"
+                    key={image}
+                  />
+                ))}
+              </>
+            </div> */}
+
+            <div className="flex flex-wrap gap-4  xl:max-w-[75%] ">
+              {image?.map((image, idx) => (
+                <div className="size-[120px]  relative" key={idx}>
+                  <Image
+                    src={image}
+                    alt={id}
+                    fill
+                    className="object-cover w-full"
+                  />
+                </div>
+              ))}
             </div>
 
             {/* Product Heading */}

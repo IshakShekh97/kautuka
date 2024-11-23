@@ -45,7 +45,7 @@ const ProductsPage = async () => {
           </Link>
         </Button>
       </div>
-      <Card className="mt-5">
+      <Card className="mt-5 border-b-8 border-r-8 border-black dark:border-gray-200">
         <CardHeader className="px-7">
           <CardTitle className="sm:text-4xl text-2xl font-extrabold">
             Products

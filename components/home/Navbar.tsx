@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronDown, Menu, ShoppingCart } from "lucide-react";
+import { ChevronDown, Menu, ShoppingBag } from "lucide-react";
 import { Button } from "../ui/button";
 import {
   DropdownMenu,
@@ -22,6 +22,7 @@ import {
 } from "../ui/accordion";
 import { SignedIn, SignedOut, SignUpButton, UserButton } from "@clerk/nextjs";
 import Logo from "../resuables/Logo";
+import { Category } from "@prisma/client";
 
 const Navbar = () => {
   const pathName = usePathname();
@@ -39,9 +40,9 @@ const Navbar = () => {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            {shopLinks.map((link, idx) => (
+            {Object.values(Category).map((category, idx) => (
               <DropdownMenuItem key={idx}>
-                <Link href={link.href}>{link.name}</Link>
+                <Link href={`/products?category=${category}`}>{category}</Link>
               </DropdownMenuItem>
             ))}
           </DropdownMenuContent>
@@ -68,11 +69,6 @@ const Navbar = () => {
         ))}
       </div>
       <div className="flex items-center justify-center gap-2 max-lg:hidden">
-        <Button variant={"ghost"} size={"icon"} asChild>
-          <Link href={"/cart"}>
-            <ShoppingCart className="size-5" />
-          </Link>
-        </Button>
         <SignedOut>
           <Button variant={"outline"} size={"lg"}>
             <SignUpButton forceRedirectUrl={"/api/create-user"} />
@@ -81,6 +77,11 @@ const Navbar = () => {
         <SignedIn>
           <Button variant={"ghost"} size={"icon"}>
             <UserButton />
+          </Button>
+          <Button variant={"ghost"} size={"icon"} asChild>
+            <Link href={"/cart"}>
+              <ShoppingBag className="size-5" />
+            </Link>
           </Button>
         </SignedIn>
         <ThemeSwitcher
@@ -98,7 +99,7 @@ const Navbar = () => {
           </Button>
           <Button variant={"outline"} size={"icon"} asChild className="">
             <Link href={"/cart"}>
-              <ShoppingCart className="size-5" />
+              <ShoppingBag className="size-5" />
             </Link>
           </Button>
         </SignedIn>

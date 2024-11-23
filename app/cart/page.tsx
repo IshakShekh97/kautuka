@@ -1,7 +1,14 @@
 import Navbar from "@/components/home/Navbar";
+import { currentUser } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 import React from "react";
 
 const CartPage = async () => {
+  const user = await currentUser();
+  if (!user) {
+    redirect("/sign-in");
+  }
+
   return (
     <div>
       <Navbar />
