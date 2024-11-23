@@ -1,14 +1,17 @@
-import { TextGenerateEffect } from "@/components/ace/text-generate-effect";
+// import { TextGenerateEffect } from "@/components/ace/text-generate-effect";
 import { features } from "@/constants";
 
 const Features = () => {
   return (
     <div className="w-full mb-32 mt-10 relative px-3 sm:px-6 md:px-9">
       <div className="flex flex-col items-center justify-center">
-        <TextGenerateEffect
+        {/* <TextGenerateEffect
           className="sm:text-5xl text-4xl text-center underline underline-offset-4"
           words="Why Choose Us?"
-        />
+        /> */}
+        <div className="sm:text-5xl text-4xl text-center underline underline-offset-4">
+          Why Choose Us?
+        </div>
 
         <div className="max-w-3xl mx-auto text-center pt-14 sm:py-20">
           <p className="font-semibold leading-7 text-primary text-xl">

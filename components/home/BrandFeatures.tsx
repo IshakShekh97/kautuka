@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 
 const BrandFeatures = () => {
   return (
-    <div className="pt-10 mb-10">
+    <div className="pt-10 my-10">
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-sm:place-items-center">
         {features.map((feature, index) => (
           <div

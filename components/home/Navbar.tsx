@@ -42,7 +42,7 @@ const Navbar = () => {
           <DropdownMenuContent>
             {Object.values(Category).map((category, idx) => (
               <DropdownMenuItem key={idx}>
-                <Link href={`/products?category=${category}`}>{category}</Link>
+                <Link href={`/products/${category}`}>{category}</Link>
               </DropdownMenuItem>
             ))}
           </DropdownMenuContent>
@@ -70,12 +70,12 @@ const Navbar = () => {
       </div>
       <div className="flex items-center justify-center gap-2 max-lg:hidden">
         <SignedOut>
-          <Button variant={"outline"} size={"lg"}>
+          <Button asChild variant={"outline"} size={"lg"}>
             <SignUpButton forceRedirectUrl={"/api/create-user"} />
           </Button>
         </SignedOut>
         <SignedIn>
-          <Button variant={"ghost"} size={"icon"}>
+          <Button asChild variant={"ghost"} size={"icon"}>
             <UserButton />
           </Button>
           <Button variant={"ghost"} size={"icon"} asChild>
@@ -110,7 +110,7 @@ const Navbar = () => {
         </SignedOut>
 
         <Sheet>
-          <SheetTrigger className="lg:hidden">
+          <SheetTrigger asChild className="lg:hidden">
             <Button variant={"secondary"} size={"icon"}>
               <Menu className="size-5" />
             </Button>
