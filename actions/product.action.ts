@@ -77,15 +77,6 @@ export const DeleteProduct = async (formData: FormData) => {
   redirect("/dashboard/products");
 };
 
-export const GetAllProducts = async () => {
-  const products = await prisma.product.findMany({
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
-  return products;
-};
-
 export const GetProductById = async (id: string) => {
   const product = await prisma.product.findUnique({ where: { id } });
   return product;

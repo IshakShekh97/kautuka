@@ -17,6 +17,8 @@ const badgeVariants = cva(
         outline: "text-foreground",
         positive:
           "border-transparent bg-emerald-500 text-black hover:bg-emerald-600",
+        price:
+          "border-emerald-500 border bg-emerald-500/50 text-white hover:bg-emerald-500/80",
       },
     },
     defaultVariants: {

@@ -84,12 +84,53 @@ enum ProductStatus {
   draft
   published
   archived
+}
+
+enum ProductStock {
   inStock
   outOfStock
+}
+
+enum ProductSize {
+  S
+  M
+  L
+  XL
+}
+
+enum ProductColor {
+  Red
+  Blue
+  Green
+  Yellow
+  Black
+  White
+  Gray
+  Brown
+  Purple
 }
 
 enum Category {
   oversize
   regularFit
   polo
+}
+
+enum Tags {
+  Casual
+  Formal
+  Party
+  Plain
+  Print
+  Pattern
+  Solid
+  Striped
+  Textured
+  VNeck
+  Collar
+  CrewNeck
+  Henley
+  ONeck
+  Polo
+  RoundNeck
 }

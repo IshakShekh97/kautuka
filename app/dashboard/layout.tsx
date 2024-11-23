@@ -24,8 +24,11 @@ const DashBoardLayout = async ({ children }: { children: React.ReactNode }) => {
       <Header />
       <Suspense
         fallback={
-          <Skeleton className="h-screen w-full flex items-center justify-center text-2xl">
-            <p className="animate-ping">Loading...</p>
+          <Skeleton className="h-screen w-full flex items-center justify-center text-2xl flex-col gap-y-5 m-5">
+            <p className="animate-pulse">Loading...</p>
+            <p className="animate-pulse text-lg">
+              Hope you are having a good day
+            </p>
           </Skeleton>
         }
       >

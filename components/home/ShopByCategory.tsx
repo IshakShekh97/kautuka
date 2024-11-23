@@ -11,7 +11,7 @@ import { ArrowUpRight } from "lucide-react";
 
 const ShopByCategory = () => {
   return (
-    <div className="py-20">
+    <div className="py-10">
       <div className="flex justify-between items-center">
         <h2 className="text-2xl md:text-4xl font-bold">Shop By Category</h2>
         <Button asChild variant={"outline"} size={"lg"}>

@@ -1,4 +1,3 @@
-import { GetAllProducts } from "@/actions/product.action";
 import { GetAllUsers } from "@/actions/user.actions";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
@@ -8,11 +7,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { getAllProducts } from "@/lib/dataFetchers";
 import { IndianRupee, PartyPopper, ShoppingBag } from "lucide-react";
 import React from "react";
 
 const DashBoardPage = async () => {
-  const totalProducts = (await GetAllProducts()).length;
+  const totalProducts = (await getAllProducts()).length;
   const totalUsers = (await GetAllUsers()).length;
 
   return (

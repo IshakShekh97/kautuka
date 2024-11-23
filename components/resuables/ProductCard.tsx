@@ -1,122 +1,66 @@
-import React from "react";
+"use client";
+
+import { Product } from "@prisma/client";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardTitle,
-  CardHeader,
-} from "@/components/ui/card";
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "../ui/carousel";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { ExternalLink, ShoppingCart, ShoppingCartIcon } from "lucide-react";
+import Autoplay from "embla-carousel-autoplay";
+
+import { Suspense } from "react";
+import { Skeleton } from "../ui/skeleton";
+import { Badge } from "../ui/badge";
+import { Button } from "../ui/button";
 import Link from "next/link";
-// import { AddToCart } from "@/actions/addToCart.action";
 
 interface ProductCardProps {
-  title?: string;
-  description?: string;
-  imageUrl?: string;
-  imageAlt?: string;
+  product: Product;
 }
 
-const ProductCard = ({
-  description,
-  imageAlt,
-  imageUrl,
-  title,
-}: ProductCardProps) => {
+const ProductCard = ({ product }: ProductCardProps) => {
   return (
-    <>
-      <Card className="sm:max-w-[350px] max-w-[150px] sm:block hidden">
-        <CardHeader className="max-sm:hidden">
-          <CardTitle className="text-base">
-            {title ? title : <p>OverSized Tee</p>}
-          </CardTitle>
-          <CardDescription className="truncate max-sm:hidden">
-            {description ? (
-              description
-            ) : (
-              <span>OverSized Tee of Geen Color with awsome Doodle Art</span>
-            )}
-          </CardDescription>
-        </CardHeader>
+    <div className="rounded-lg">
+      <Carousel
+        plugins={[Autoplay({ delay: 2500 })]}
+        className="w-full mx-auto rounded-lg"
+      >
+        <CarouselContent className="rounded-lg">
+          {product.images.map((image, idx) => (
+            <CarouselItem key={idx} className="rounded-lg">
+              <Suspense fallback={<Skeleton className="h-[400px] w-full" />}>
+                <div className="relative h-[400px]">
+                  <Image
+                    src={image}
+                    alt={product.name}
+                    fill
+                    className="object-cover object-center w-full h-full rounded-lg "
+                  />
+                </div>
+              </Suspense>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselNext className="mr-16" />
+        <CarouselPrevious className="ml-16" />
+      </Carousel>
 
-        <CardContent>
-          <div className="relative sm:size-[300px] w-[100px] h-[100px] mt-5  bg-secondary rounded-lg overflow-hidden ">
-            <Image
-              src={(imageUrl as string) || "/images/shirt-1.webp"}
-              alt={imageAlt || "Shirt Image"}
-              fill
-              className="w-full object-cover hover:scale-105 transition-transform"
-            />
-          </div>
-        </CardContent>
-
-        <div className="sm:hidden flex px-2 pb-3 flex-col overflow-hidden">
-          <h1 className="text-sm">
-            {title ? title : <span>OverSized Tee</span>}
-          </h1>
-          <p className="text-xs truncate">
-            {description ? (
-              description
-            ) : (
-              <span>OverSized Tee of Geen Color with awsome Doodle Art</span>
-            )}
-          </p>
-        </div>
-
-        <CardFooter className="gap-5 justify-between hidden sm:flex ">
-          <Button variant={"default"}>
-            <Link href={"/cart"}>Add to Cart</Link>
-          </Button>
-          <Button variant={"outline"}>View Details</Button>
-        </CardFooter>
-        <CardFooter className="gap-5 justify-between flex  sm:hidden ">
-          <Button variant={"default"} size={"sm"}>
-            <Link href={"/cart"}>
-              <ShoppingCart className="size-4" />
-            </Link>
-          </Button>
-          <Button variant={"outline"} size={"sm"}>
-            <ExternalLink className="size-4" />
-          </Button>
-        </CardFooter>
-      </Card>
-
-      <Card className="sm:hidden flex flex-col p-1 w-44 h-fit relative">
-        {/* Image */}
-        <div className="relative  rounded-lg overflow-hidden w-full h-[12rem]">
-          <Image
-            src={(imageUrl as string) || "/images/shirt-1.webp"}
-            alt={imageAlt || "Shirt Image"}
-            fill
-            className="w-full object-cover hover:scale-105 transition-transform"
-          />
-        </div>
-        {/* Cart Icon */}
-        <div className="absolute top-2 right-2 rounded-full bg-primary text-secondary p-2 ">
-          <form>
-            <Link href={"/cart"} className="">
-              <ShoppingCartIcon />
-            </Link>
-          </form>
-        </div>
-        {/* Details */}
-        <div className="h-[20%] py-3 text-pretty px-2">
-          <h1 className="text-xl line-clamp-2 pb-1">
-            {title ? title : <span>OverSized Tee</span>}
-          </h1>
-          <p className="text-xs line-clamp-3 text-muted-foreground">
-            {description ? (
-              description
-            ) : (
-              <span>OverSized Tee of Geen Color with awsome Doodle Art</span>
-            )}
-          </p>
-        </div>
-      </Card>
-    </>
+      <div className="flex justify-between items-center mt-2">
+        <p className="text-xl font-semibold">{product.name}</p>
+        <Badge className="text-base font-bold" variant={"price"}>
+          ₹{product.price}
+        </Badge>
+      </div>
+      <p className="text-sm text-muted-foreground mt-2 line-clamp-2">
+        {product.description}
+      </p>
+      <Button asChild className="w-full mt-4">
+        <Link href={`/products/${product.id}`}>Learn More</Link>
+      </Button>
+    </div>
   );
 };
 

@@ -3,6 +3,8 @@ import ProductContent from "../_components/productContent";
 import { GetProductById } from "@/actions/product.action";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { Suspense } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const ProductPage = async ({
   params,
@@ -25,14 +27,16 @@ const ProductPage = async ({
 
   return (
     <>
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col mt-5">
         <GoBackBtn
-          herf="/products/"
+          herf="/products"
           btnText="Go Back To All Products"
-          className="md:!text-3xl  px-10"
+          className="md:!text-3xl"
         />
 
-        <ProductContent id={id} product={product} />
+        <Suspense fallback={<Skeleton className="h-[80vh] w-full" />}>
+          <ProductContent id={id} product={product} />
+        </Suspense>
       </div>
     </>
   );
