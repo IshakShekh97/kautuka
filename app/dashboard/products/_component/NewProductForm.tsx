@@ -161,8 +161,6 @@ const NewProductForm = () => {
                       <SelectItem value="draft">Draft</SelectItem>
                       <SelectItem value="published">Published</SelectItem>
                       <SelectItem value="archived">Archived</SelectItem>
-                      <SelectItem value="inStock">In Stock</SelectItem>
-                      <SelectItem value="outOfStock">Out of Stock</SelectItem>
                     </SelectContent>
                     <p className="text-rose-500">{fields.status.errors}</p>
                   </Select>
@@ -195,6 +193,45 @@ const NewProductForm = () => {
                   Flag This Product as Featured Product
                 </Label>
                 <p className="text-rose-500">{fields.isFeatured.errors}</p>
+              </div>
+            </div>
+
+            <div className="flex flex-col space-y-5 mt-5">
+              <div className="flex flex-col gap-2">
+                <Label htmlFor="stock">Stock</Label>
+                <Select
+                  key={fields.stock.key}
+                  name={fields.stock.name}
+                  defaultValue={fields.stock.initialValue}
+                >
+                  <SelectTrigger className="max-w-[30rem] w-full">
+                    <SelectValue placeholder="Select the Stock of the product" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="inStock">In Stock</SelectItem>
+                    <SelectItem value="outOfStock">Out of Stock</SelectItem>
+                  </SelectContent>
+                </Select>
+                <p className="text-rose-500">{fields.stock.errors}</p>
+              </div>
+              <div className="flex flex-col  gap-2">
+                <Label htmlFor="size">Size</Label>
+                <Select
+                  key={fields.size.key}
+                  name={fields.size.name}
+                  defaultValue={fields.size.initialValue}
+                >
+                  <SelectTrigger className="max-w-[30rem] w-full">
+                    <SelectValue placeholder="Select the Stock of the product" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="S">S</SelectItem>
+                    <SelectItem value="M">M</SelectItem>
+                    <SelectItem value="L">L</SelectItem>
+                    <SelectItem value="XL">XL</SelectItem>
+                  </SelectContent>
+                </Select>
+                <p className="text-rose-500">{fields.size.errors}</p>
               </div>
             </div>
           </div>

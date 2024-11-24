@@ -11,8 +11,6 @@ import {
 import Image from "next/image";
 import Autoplay from "embla-carousel-autoplay";
 
-import { Suspense } from "react";
-import { Skeleton } from "../ui/skeleton";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import Link from "next/link";
@@ -31,16 +29,14 @@ const ProductCard = ({ product }: ProductCardProps) => {
         <CarouselContent className="rounded-lg">
           {product.images.map((image, idx) => (
             <CarouselItem key={idx} className="rounded-lg">
-              <Suspense fallback={<Skeleton className="h-[400px] w-full" />}>
-                <div className="relative h-[400px]">
-                  <Image
-                    src={image}
-                    alt={product.name}
-                    fill
-                    className="object-cover object-center w-full h-full rounded-lg "
-                  />
-                </div>
-              </Suspense>
+              <div className="relative h-[400px]">
+                <Image
+                  src={image}
+                  alt={product.name}
+                  fill
+                  className="object-cover object-center w-full h-full rounded-lg "
+                />
+              </div>
             </CarouselItem>
           ))}
         </CarouselContent>

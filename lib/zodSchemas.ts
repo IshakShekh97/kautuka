@@ -26,7 +26,10 @@ export const productSchema = z.object({
       message: "Description must be at most 700 characters",
     }),
 
-  status: z.enum(["draft", "published", "archived", "inStock", "outOfStock"]),
+  status: z.enum(["draft", "published", "archived"]),
+  stock: z.enum(["inStock", "outOfStock"]),
+  size: z.enum(["S", "M", "L", "XL"]),
+
   price: z
     .number({
       message: "Price must be a Number",

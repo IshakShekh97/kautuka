@@ -9,7 +9,7 @@ const Features = () => {
           className="sm:text-5xl text-4xl text-center underline underline-offset-4"
           words="Why Choose Us?"
         /> */}
-        <div className="sm:text-5xl text-4xl text-center underline underline-offset-4">
+        <div className="sm:text-5xl text-3xl font-black text-center underline underline-offset-4">
           Why Choose Us?
         </div>
 

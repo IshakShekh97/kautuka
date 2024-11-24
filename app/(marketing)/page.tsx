@@ -1,7 +1,7 @@
 import BannerCarousel from "@/components/home/BannerCarousel";
 import BrandFeatures from "@/components/home/BrandFeatures";
 import FeaturedProducts from "@/components/home/FeaturedProducts";
-// import Features from "@/components/home/Features";
+import Features from "@/components/home/Features";
 import Highlight from "@/components/home/Highlight";
 import ShopByCategory from "@/components/home/ShopByCategory";
 
@@ -18,7 +18,7 @@ const Home = async () => {
       <ShopByCategory />
       <BrandFeatures />
       <FeaturedProducts products={featuredProducts} />
-      {/* <Features /> */}
+      <Features />
     </div>
   );
 };

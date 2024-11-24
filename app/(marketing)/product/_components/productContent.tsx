@@ -4,6 +4,7 @@ import { Product } from "@prisma/client";
 import ImageSlider from "./ImageSlider";
 import { ShoppingBag, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 interface ProductContentProps {
   id: string;
@@ -31,9 +32,11 @@ const ProductContent = ({ product }: ProductContentProps) => {
           <p className="text-base text-muted-foreground text-pretty">
             {product.description}
           </p>
-          <Button className="" size={"lg"}>
-            <ShoppingBag className="w-4 h-4 mr-2" />
-            Add to Cart
+          <Button className="" size={"lg"} asChild>
+            <Link href={`/buy/${product.id}`}>
+              <ShoppingBag className="w-4 h-4 mr-2" />
+              Buy Now
+            </Link>
           </Button>
         </div>
       </div>

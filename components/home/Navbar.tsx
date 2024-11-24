@@ -1,13 +1,8 @@
 "use client";
 
-import { ChevronDown, Menu, ShoppingBag } from "lucide-react";
+import { Menu, ShoppingBag } from "lucide-react";
 import { Button } from "../ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
-} from "../ui/dropdown-menu";
+
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 import { ThemeSwitcher } from "../ThemeSwitcher";
 import { navLinks, shopLinks } from "@/constants";
@@ -22,7 +17,7 @@ import {
 } from "../ui/accordion";
 import { SignedIn, SignedOut, SignUpButton, UserButton } from "@clerk/nextjs";
 import Logo from "../resuables/Logo";
-import { Category } from "@prisma/client";
+import CategorySelector from "../resuables/CategorySelector";
 
 const Navbar = () => {
   const pathName = usePathname();
@@ -33,22 +28,7 @@ const Navbar = () => {
 
       {/* Desktop Nav */}
       <div className="flex items-center justify-center gap-2 max-lg:hidden">
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant={"outline"}>
-              Categories <ChevronDown />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            {Object.values(Category).map((category, idx) => (
-              <DropdownMenuItem key={idx} asChild>
-                <Link href={`/products/${category}`} className="uppercase">
-                  {category}
-                </Link>
-              </DropdownMenuItem>
-            ))}
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <CategorySelector />
         {navLinks.map((link, idx) => (
           <Button
             key={idx}
