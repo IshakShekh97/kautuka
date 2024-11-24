@@ -1,4 +1,3 @@
-import { GetAllProducts } from "@/actions/product.action";
 import GoBackBtn from "@/components/resuables/GoBackBtn";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -26,13 +25,14 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { getAllProducts } from "@/lib/dataFetchers";
 import { MoreHorizontal, Plus } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
 const ProductsPage = async () => {
-  const products = await GetAllProducts();
+  const products = await getAllProducts();
 
   return (
     <>

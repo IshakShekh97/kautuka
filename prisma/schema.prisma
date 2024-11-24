@@ -84,6 +84,8 @@ enum ProductStatus {
   draft
   published
   archived
+  inStock
+  outOfStock
 }
 
 enum ProductStock {
