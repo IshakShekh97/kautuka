@@ -4,7 +4,6 @@ import { Product } from "@prisma/client";
 import ImageSlider from "./ImageSlider";
 import { ShoppingBag, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import FeaturedProducts from "@/components/home/FeaturedProducts";
 
 interface ProductContentProps {
   id: string;
@@ -14,7 +13,7 @@ interface ProductContentProps {
 const ProductContent = ({ product }: ProductContentProps) => {
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start lg:gap-x-24 sm:py-6 py-2">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 items-start lg:gap-x-24 sm:py-6 py-2">
         <ImageSlider images={product.images} />
         <div className="flex flex-col gap-4">
           <h1 className="text-3xl font-black">{product.name}</h1>
@@ -37,10 +36,6 @@ const ProductContent = ({ product }: ProductContentProps) => {
             Add to Cart
           </Button>
         </div>
-      </div>
-
-      <div className="mt-12">
-        <FeaturedProducts products={[]} />
       </div>
     </>
   );

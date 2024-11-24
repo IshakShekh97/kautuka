@@ -25,8 +25,8 @@ const ImageSlider = ({ images }: ImageSliderProps) => {
 
   return (
     <>
-      <div className="grid gap-6 md:gap-3 items-start">
-        <div className="relative rounded-lg overflow-hidden  sm:w-[600px] sm:h-[600px]">
+      <div className="grid gap-6 md:gap-3 items-start grid-cols-1 place-items-center">
+        <div className="relative rounded-lg overflow-hidden max-sm:h-[600px] w-full sm:w-[600px] sm:h-[600px]">
           <Suspense fallback={<Skeleton className="w-full h-full" />}>
             <Image
               src={images[currentImage]}

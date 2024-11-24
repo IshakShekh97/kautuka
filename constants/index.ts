@@ -79,7 +79,7 @@ export const navLinks = [
   },
   {
     name: "Shop All",
-    href: "/products",
+    href: "/products/all",
     idx: 1,
   },
   {
@@ -234,17 +234,17 @@ export const productfeatures = [
 export const shopLinks = [
   {
     name: "Polos",
-    href: "/products?category=polos",
+    href: "/products/polo",
     idx: 0,
   },
   {
     name: "OverSized Tshirts",
-    href: "products?category=oversized",
+    href: "products/oversize",
     idx: 1,
   },
   {
     name: "Tshirt",
-    href: "products?category=tshirt",
+    href: "products/regularFit",
     idx: 2,
   },
 ];

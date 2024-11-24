@@ -41,8 +41,10 @@ const Navbar = () => {
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             {Object.values(Category).map((category, idx) => (
-              <DropdownMenuItem key={idx}>
-                <Link href={`/products/${category}`}>{category}</Link>
+              <DropdownMenuItem key={idx} asChild>
+                <Link href={`/products/${category}`} className="uppercase">
+                  {category}
+                </Link>
               </DropdownMenuItem>
             ))}
           </DropdownMenuContent>
@@ -134,7 +136,7 @@ const Navbar = () => {
                       >
                         <Link
                           href={link.href}
-                          className="hover:underline underline-offset-2 w-fit"
+                          className="hover:underline underline-offset-2 w-fit uppercase"
                         >
                           {link.name}
                         </Link>

@@ -58,7 +58,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
         {product.description}
       </p>
       <Button asChild className="w-full mt-4">
-        <Link href={`/products/${product.id}`}>Learn More</Link>
+        <Link href={`/product/${product.id}`}>Learn More</Link>
       </Button>
     </div>
   );
