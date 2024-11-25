@@ -214,25 +214,6 @@ const NewProductForm = () => {
                 </Select>
                 <p className="text-rose-500">{fields.stock.errors}</p>
               </div>
-              <div className="flex flex-col  gap-2">
-                <Label htmlFor="size">Size</Label>
-                <Select
-                  key={fields.size.key}
-                  name={fields.size.name}
-                  defaultValue={fields.size.initialValue}
-                >
-                  <SelectTrigger className="max-w-[30rem] w-full">
-                    <SelectValue placeholder="Select the Stock of the product" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="S">S</SelectItem>
-                    <SelectItem value="M">M</SelectItem>
-                    <SelectItem value="L">L</SelectItem>
-                    <SelectItem value="XL">XL</SelectItem>
-                  </SelectContent>
-                </Select>
-                <p className="text-rose-500">{fields.size.errors}</p>
-              </div>
             </div>
           </div>
           <SubmitBtn

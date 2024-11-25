@@ -10,7 +10,6 @@ export const CreateNewProduct = async (
   prevState: unknown,
   formData: FormData
 ) => {
-  // const user = await validateAdmin();
   await validateAdmin();
 
   const submission = parseWithZod(formData, { schema: productSchema });
@@ -32,6 +31,7 @@ export const CreateNewProduct = async (
       images: flattenUrls,
       category: submission.value.categories,
       isFeatured: submission.value.isFeatured === true ? true : false,
+      stock: submission.value.stock,
     },
   });
 

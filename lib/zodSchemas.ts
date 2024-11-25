@@ -28,7 +28,6 @@ export const productSchema = z.object({
 
   status: z.enum(["draft", "published", "archived"]),
   stock: z.enum(["inStock", "outOfStock"]),
-  size: z.enum(["S", "M", "L", "XL"]),
 
   price: z
     .number({

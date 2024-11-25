@@ -37,7 +37,13 @@ const ProductPage = async ({
           className="md:!text-3xl"
         />
 
-        <Suspense fallback={<Skeleton className="h-[80vh] w-full" />}>
+        <Suspense
+          fallback={
+            <Skeleton className="h-[80vh] w-full flex items-center justify-center text-2xl sm:text-4xl">
+              This Won&apos;t Take long
+            </Skeleton>
+          }
+        >
           <ProductContent id={id} product={product} />
         </Suspense>
 

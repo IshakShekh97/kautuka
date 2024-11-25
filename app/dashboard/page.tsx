@@ -1,4 +1,3 @@
-import { GetAllUsers } from "@/actions/user.actions";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
   Card,
@@ -8,12 +7,15 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { getAllProducts } from "@/lib/dataFetchers";
+import { clerkClient } from "@clerk/nextjs/server";
 import { IndianRupee, PartyPopper, ShoppingBag } from "lucide-react";
 import React from "react";
 
 const DashBoardPage = async () => {
   const totalProducts = (await getAllProducts()).length;
-  const totalUsers = (await GetAllUsers()).length;
+  // const totalUsers = (await GetAllUsers()).length;
+
+  const totalUsers = await (await clerkClient()).users.getCount();
 
   return (
     <>
